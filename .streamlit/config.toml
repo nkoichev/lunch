@@ -1,0 +1,27 @@
+
+
+[server]
+enableCORS=true
+enableXsrfProtection=true
+maxUploadSize = 5000
+maxMessageSize = 5000
+
+# [server.sharing]
+# enable=true
+
+
+
+
+
+[theme]
+base="light"
+#backgroundColor="#FDF7F2"  # Example Anthropic-like light background
+#primaryColor="#027ed1"     # Example accent color
+#secondaryBackgroundColor="#FFFFFF"
+# textColor="#222222"
+# font="Tahoma"
+
+
+
+
+
