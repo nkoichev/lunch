@@ -97,11 +97,13 @@ with open("KjTHbioe5L.json", "r", errors='ignore') as f:
     data_lottie = json.load(f)
 
 col1, col2, col3 = st.columns([1.6, 7, 0.1])
-with col1:
-    st_lottie(data_lottie, loop=False, width=50, height=50)
-with col2:
-    check1 = st.toggle('Всички поръчали', value=True, key='check1')
-    check2 = st.toggle('Обобщено по имена', value=True, key='check2')
+
+container = st.container(horizontal_alignment="center")
+with container:
+    st_lottie(data_lottie, loop=False, width=300, height=300)
+
+check1 = st.toggle('Всички поръчали', value=True, key='check1')
+check2 = st.toggle('Обобщено по имена', value=True, key='check2')
 
 # --- Main Client Controls ---
 @st.fragment
