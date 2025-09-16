@@ -11,6 +11,7 @@ import gspread
 from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 from google.auth.exceptions import RefreshError
+from google.oauth2 import service_account
 
 SPREADSHEET_URL = st.secrets["spreadsheet"]
 
