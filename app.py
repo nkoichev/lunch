@@ -98,7 +98,14 @@ with open("KjTHbioe5L.json", "r", errors='ignore') as f:
 
 col1, col2, col3 = st.columns([1.6, 7, 0.1])
 
-
+st.markdown(
+    """
+    <div style="display: flex; justify-content: center;">
+        <div id="lottie"></div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 st_lottie(data_lottie, loop=False, width=300, height=300)
 
 check1 = st.toggle('Всички поръчали', value=True, key='check1')
