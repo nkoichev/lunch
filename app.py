@@ -108,10 +108,7 @@ check2 = st.toggle('Обобщено по имена', value=True, key='check2')
 @st.fragment
 def client_controls(df_hora, df_orders, load_time_str):
 
-    button_update = st.button('🔄 Обнови данните')
-    if button_update:
-        st.cache_data.clear()
-        st.rerun()
+
 
     df_current_clients = pd.pivot_table(
         df_orders, values=['total'], index=['Client'],
@@ -158,5 +155,9 @@ def client_controls(df_hora, df_orders, load_time_str):
 
         st.write("---")
         st.write(f'Последна промяна: :red[**{formatted_time}**] /      [{text}]({file_url})')
-
+        
+    button_update = st.button('🔄 Обнови данните')
+    if button_update:
+        st.cache_data.clear()
+        st.rerun()
 client_controls(df_hora, df_orders, str(load_time))
