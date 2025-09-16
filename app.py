@@ -106,7 +106,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-st_lottie(data_lottie, loop=False, width=300, height=300)
+st_lottie(data_lottie, loop=False, width=300, height=300, key="lottie")
 
 check1 = st.toggle('Всички поръчали', value=True, key='check1')
 check2 = st.toggle('Обобщено по имена', value=True, key='check2')
