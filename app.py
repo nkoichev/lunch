@@ -90,7 +90,7 @@ def load_google_sheets_data():
 # --- Timed load for diagnostics, not cached ---
 start_time = time.time()
 df_hora, df_mandji, df_orders = load_google_sheets_data()
-load_time = timedelta(seconds=int(time.time() - start_time))
+
 
 # --- Lottie Animation ---
 with open("KjTHbioe5L.json", "r", errors='ignore') as f:
@@ -101,7 +101,7 @@ with st.container(horizontal=True, horizontal_alignment="center"):
 
 # --- Main Client Controls ---
 @st.fragment
-def client_controls(df_hora, df_orders, load_time_str):
+def client_controls(df_hora, df_orders):
 
 
 
@@ -158,4 +158,4 @@ def client_controls(df_hora, df_orders, load_time_str):
     if button_update:
         st.cache_data.clear()
         st.rerun()
-client_controls(df_hora, df_orders, str(load_time))
+client_controls(df_hora, df_orders)
