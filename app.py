@@ -96,15 +96,16 @@ load_time = timedelta(seconds=int(time.time() - start_time))
 with open("KjTHbioe5L.json", "r", errors='ignore') as f:
     data_lottie = json.load(f)
 
-col1, col2, col3 = st.columns([1.6, 3, 7])
+col1, col2, col3 = st.columns([1.6, 7, 0.1])
 with col1:
     st_lottie(data_lottie, loop=False, width=100, height=100)
 
 # --- Main Client Controls ---
 @st.fragment
 def client_controls(df_hora, df_orders, load_time_str):
-    check1 = st.toggle('Всички поръчали до момента', value=True, key='check1')
-    check2 = st.toggle('Обобщено по имена', value=True, key='check2')
+    with col2:
+        check1 = st.toggle('Всички поръчали', value=True, key='check1')
+        check2 = st.toggle('Обобщено по имена', value=True, key='check2')
 
 
     button_update = st.button('🔄 Обнови данните')
