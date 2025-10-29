@@ -148,7 +148,7 @@ def client_controls(df_hora, df_orders):
                 s = s.replace("total", "Общо")
                 st.markdown(s, unsafe_allow_html=True)
         # else:
-            st.write(f'**{client}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
+            st.write(f'**{client}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "").replace("[", "").replace("]", "")}**] лева.')
             df_client_sorted = df_client.sort_values(by='Client', ascending=True)
             styled_df = df_client_sorted.style.format(thousands=" ", precision=2)
             st.dataframe(styled_df, use_container_width=True, hide_index=True)
