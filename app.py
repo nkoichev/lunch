@@ -118,7 +118,9 @@ def client_controls(df_hora, df_orders):
     #     li_current_clients = []
 
     li_clients = df_hora['Client'].unique().tolist()
-    client = st.multiselect('', li_clients, default=li_current_clients, key='clients')
+    # client = st.multiselect('', li_clients, default=li_current_clients, key='clients')
+
+    client = li_current_clients
 
     df_main2 = df_orders.copy()
     if client:
