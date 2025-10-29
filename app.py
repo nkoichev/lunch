@@ -156,8 +156,10 @@ def client_controls(df_hora, df_orders):
         st.write("---")
         st.write(f'Последна промяна: :red[**{formatted_time}**] /      [{text}]({file_url})')
 
-    button_update = st.button('🔄 Обнови данните')
-    if button_update:
-        st.cache_data.clear()
-        st.rerun()
+
 client_controls(df_hora, df_orders)
+
+button_update = st.button('🔄 Обнови данните')
+if button_update:
+    st.cache_data.clear()
+    st.rerun()
