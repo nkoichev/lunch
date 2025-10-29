@@ -105,7 +105,7 @@ def client_controls(df_hora, df_orders):
 
 
 
-    check1 = st.toggle('Всички поръчали', value=True, key='check1')
+    # check1 = st.toggle('Всички поръчали', value=True, key='check1')
     check2 = st.toggle('Обобщено по имена', value=True, key='check2')
 
     df_current_clients = pd.pivot_table(
@@ -114,8 +114,8 @@ def client_controls(df_hora, df_orders):
     ).reset_index()
     li_current_clients = [i for i in df_current_clients['Client'].unique() if i not in ('total', '')]
 
-    if not check1:
-        li_current_clients = []
+    # if not check1:
+    #     li_current_clients = []
 
     li_clients = df_hora['Client'].unique().tolist()
     client = st.multiselect('', li_clients, default=li_current_clients, key='clients')
