@@ -134,7 +134,7 @@ def client_controls(df_hora, df_orders):
         df_client = df_main2.loc[:, ('Client', 'restorant', 'desc', 'price', 'disc_price', 'quant', 'total')]
 
         if suma == 0:
-            st.write(f'**{client}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
+            st.write(f'**{client}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "").replace("[", "").replace("]", "")}**] лева.')
         else:
             # if check2:
             for _, row in df_main_pivot.iterrows():
