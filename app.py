@@ -134,7 +134,9 @@ def client_controls(df_hora, df_orders):
         df_client = df_main2.loc[:, ('Client', 'restorant', 'desc', 'price', 'disc_price', 'quant', 'total')]
 
         if suma == 0:
-            st.write(f'**{client}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "").replace("[", "").replace("]", "")}**] лева.')
+            client_str = ', '.join(client) if isinstance(client, list) else str(client)
+            st.write(f'**{client_str}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
+
         else:
             # if check2:
             for _, row in df_main_pivot.iterrows():
@@ -148,7 +150,9 @@ def client_controls(df_hora, df_orders):
                 s = s.replace("total", "Общо")
                 st.markdown(s, unsafe_allow_html=True)
         # else:
-            st.write(f'**{client}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "").replace("[", "").replace("]", "")}**] лева.')
+            client_str = ', '.join(client) if isinstance(client, list) else str(client)
+            st.write(f'**{client_str}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
+
             df_client_sorted = df_client.sort_values(by='Client', ascending=True)
             styled_df = df_client_sorted.style.format(thousands=" ", precision=2)
             st.dataframe(styled_df, use_container_width=True, hide_index=True)
