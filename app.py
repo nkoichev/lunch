@@ -150,6 +150,7 @@ def client_controls(df_hora, df_orders):
                 s = s.replace("total", "Общо")
                 st.markdown(s, unsafe_allow_html=True)
         # else:
+            st.write('---') 
             client_str = ', '.join(client) if isinstance(client, list) else str(client)
             st.write(f'**{client_str}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
 
