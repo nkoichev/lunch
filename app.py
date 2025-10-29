@@ -106,7 +106,7 @@ def client_controls(df_hora, df_orders):
 
 
     # check1 = st.toggle('Всички поръчали', value=True, key='check1')
-    check2 = st.toggle('Обобщено по имена', value=True, key='check2')
+    # check2 = st.toggle('Обобщено по имена', value=True, key='check2')
 
     df_current_clients = pd.pivot_table(
         df_orders, values=['total'], index=['Client'],
@@ -134,22 +134,22 @@ def client_controls(df_hora, df_orders):
         if suma == 0:
             st.write(f'**{client}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
         else:
-            if check2:
-                for _, row in df_main_pivot.iterrows():
-                    if row['Client'] == 'total':
-                        continue
-                    formatted_total = (
-                        f"<span style='color:black'>{row['Client']}</span>: "
-                        f"<span style='color:blue'>{row['total']:,.2f}</span>"
-                    ).replace(",", " ")
-                    s = f"<p style='font-size:40px;'>{formatted_total}</p>"
-                    s = s.replace("total", "Общо")
-                    st.markdown(s, unsafe_allow_html=True)
-            else:
-                st.write(f'**{client}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
-                df_client_sorted = df_client.sort_values(by='Client', ascending=True)
-                styled_df = df_client_sorted.style.format(thousands=" ", precision=2)
-                st.dataframe(styled_df, use_container_width=True, hide_index=True)
+            # if check2:
+            for _, row in df_main_pivot.iterrows():
+                if row['Client'] == 'total':
+                    continue
+                formatted_total = (
+                    f"<span style='color:black'>{row['Client']}</span>: "
+                    f"<span style='color:blue'>{row['total']:,.2f}</span>"
+                ).replace(",", " ")
+                s = f"<p style='font-size:40px;'>{formatted_total}</p>"
+                s = s.replace("total", "Общо")
+                st.markdown(s, unsafe_allow_html=True)
+        # else:
+            st.write(f'**{client}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
+            df_client_sorted = df_client.sort_values(by='Client', ascending=True)
+            styled_df = df_client_sorted.style.format(thousands=" ", precision=2)
+            st.dataframe(styled_df, use_container_width=True, hide_index=True)
 
         st.write("---")
         st.write(f'Последна промяна: :red[**{formatted_time}**] /      [{text}]({file_url})')
