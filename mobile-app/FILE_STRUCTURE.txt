@@ -1,0 +1,136 @@
+📱 LUNCH ORDERS MOBILE APP - FILE STRUCTURE
+═══════════════════════════════════════════════════════════
+
+mobile-app/
+│
+├── 📄 App.js                              ⭐ Main mobile app component
+├── 📄 package.json                        ⭐ Mobile app dependencies
+├── 📄 app.json                            ⭐ Expo configuration
+├── 📄 eas.json                            ⭐ Build configuration
+├── 📄 babel.config.js                     ⚙️  Babel configuration
+├── 📄 config.js                           ⚙️  Google Sheets config
+├── 📄 .gitignore                          ⚙️  Git ignore rules
+├── 📄 .env.example                        📝 Environment variables example
+│
+├── 📁 services/
+│   └── 📄 googleSheets.js                 ⭐ API calls to backend
+│
+├── 📁 backend/
+│   ├── 📄 server.js                       ⭐⭐⭐ Backend API server
+│   └── 📄 package.json                    ⭐ Backend dependencies
+│
+├── 📁 assets/
+│   └── 📄 README.md                       📝 Instructions for app icons
+│
+├── 📁 scripts/
+│   ├── 📄 setup.bat                       🔧 Automated setup script
+│   ├── 📄 start-backend.bat               🔧 Start backend helper
+│   └── 📄 check-ip.bat                    🔧 Find IP address helper
+│
+└── 📁 Documentation/
+    ├── 📄 README.md                       📚 Main documentation
+    ├── 📄 QUICKSTART.md                   🚀 Quick start guide
+    ├── 📄 DEPLOYMENT.md                   🌐 Production deployment
+    ├── 📄 PROJECT_OVERVIEW.md             📖 Technical details
+    └── 📄 FILE_STRUCTURE.txt              📋 This file
+
+
+═══════════════════════════════════════════════════════════
+LEGEND:
+═══════════════════════════════════════════════════════════
+
+⭐⭐⭐ = Critical - Must configure/use
+⭐⭐  = Important - Review and understand
+⭐   = Core file - Part of main app
+⚙️   = Configuration - May need to modify
+🔧   = Helper - Makes life easier
+📝   = Documentation - Read for info
+📚   = Guide - Step-by-step instructions
+
+═══════════════════════════════════════════════════════════
+WHAT TO DO WITH EACH FILE:
+═══════════════════════════════════════════════════════════
+
+✏️  MUST EDIT:
+    - services/googleSheets.js
+      → Change BACKEND_URL to your IP address
+
+🔍 SHOULD REVIEW:
+    - App.js
+      → Main app code, customize UI here
+    - backend/server.js
+      → Backend API, already configured with credentials
+    - app.json
+      → App name, package name
+
+📖 SHOULD READ:
+    - QUICKSTART.md
+      → Start here! 5-minute setup guide
+    - README.md
+      → Complete documentation
+    - DEPLOYMENT.md
+      → For production deployment
+
+🏃 SHOULD RUN:
+    - scripts/setup.bat
+      → Installs everything automatically
+    - scripts/check-ip.bat
+      → Find your computer's IP address
+    - scripts/start-backend.bat
+      → Easy way to start backend
+
+🚫 DON'T TOUCH:
+    - babel.config.js
+      → Babel configuration (auto-generated)
+    - eas.json
+      → Build settings (already configured)
+
+═══════════════════════════════════════════════════════════
+WORKFLOW:
+═══════════════════════════════════════════════════════════
+
+FIRST TIME SETUP:
+1. Run scripts/setup.bat                   [Install dependencies]
+2. Run scripts/check-ip.bat                [Get your IP]
+3. Edit services/googleSheets.js           [Set BACKEND_URL]
+4. Run scripts/start-backend.bat           [Start server]
+5. Open new terminal → npm start           [Test app]
+
+DAILY DEVELOPMENT:
+1. Run scripts/start-backend.bat           [Start server]
+2. npm start                               [Start app]
+3. Make changes to App.js                  [Develop]
+4. Save → Auto reload on phone            [Test]
+
+BUILD FOR PRODUCTION:
+1. Deploy backend to Render.com            [See DEPLOYMENT.md]
+2. Update services/googleSheets.js         [Production URL]
+3. eas build -p android                    [Build APK]
+4. Download and distribute APK             [Share with users]
+
+═══════════════════════════════════════════════════════════
+FILE SIZES (Approximate):
+═══════════════════════════════════════════════════════════
+
+Source Code (without node_modules):        ~3 MB
+With node_modules:                         ~500 MB
+Final APK:                                 ~20-50 MB
+Backend (without node_modules):            <1 MB
+Backend with node_modules:                 ~50 MB
+
+═══════════════════════════════════════════════════════════
+IMPORTANT NOTES:
+═══════════════════════════════════════════════════════════
+
+✓ All Google Sheets credentials are already configured
+✓ Uses same spreadsheet as your Streamlit app
+✓ Backend has READ-ONLY access (safe)
+✓ No Google Play Store needed - direct APK install
+✓ Works with Android 5.0+ devices
+✓ Free to build and deploy (using free tiers)
+
+═══════════════════════════════════════════════════════════
+
+🎯 START HERE: Open QUICKSTART.md and follow the steps!
+
+═══════════════════════════════════════════════════════════

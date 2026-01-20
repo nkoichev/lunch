@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Lunch Orders",
+    "slug": "lunch-orders-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0066cc"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.lunchorders.app",
+      "versionCode": 1
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ad7dc7e4-12aa-4b7a-bc17-8bd0ea2e55e4"
+      }
+    }
+  }
+}
