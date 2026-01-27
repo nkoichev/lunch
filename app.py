@@ -176,7 +176,7 @@ def client_controls(df_hora, df_orders):
                 f"<span style='color:blue'>{zero_total}</span> лева."
             )
             st.markdown(
-                f"<p style='font-size:clamp(1.4rem, 5vw, 2.5rem); margin-top:1.5em;'>{zero_line}</p>",
+                f"<p style='font-size:clamp(1.8rem, 5vw, 2.5rem); margin-top:1.5em;'>{zero_line}</p>",
                 unsafe_allow_html=True,
             )
 
@@ -189,7 +189,7 @@ def client_controls(df_hora, df_orders):
                     f"<span style='color:black'>{row['Client']}</span>: "
                     f"<span style='color:blue'>{row['total']:,.2f}</span>"
                 ).replace(",", " ")
-                s = f"<p style='font-size:clamp(1.4rem, 5vw, 2.5rem);'>{formatted_total}</p>"
+                s = f"<p style='font-size:clamp(1.8rem, 5vw, 2.5rem);'>{formatted_total}</p>"
                 s = s.replace("total", "Общо")
                 st.markdown(s, unsafe_allow_html=True)
         # else:
