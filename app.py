@@ -209,7 +209,16 @@ def client_controls(df_hora, df_orders):
                 )
 
             client_str = ', '.join(client) if isinstance(client, list) else str(client)
-            st.write(f'**{client_str}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
+            suma_fmt = format(round(suma, 2), ",.2f").replace(",", " ")
+            suma_line = (
+                f"<span style='color:black'>{client_str}</span>: "
+                f"<span style='color:blue'>{suma_fmt}</span> лева."
+            )
+            st.write("---")
+            st.markdown(
+                f"<p style='font-size:clamp(1.2rem, 5vw, 2.0rem);'>{suma_line}</p>",
+                unsafe_allow_html=True,
+            )
 
         st.write("---")
         modified_line = (
