@@ -201,7 +201,7 @@ def client_controls(df_hora, df_orders):
                 quant_str = f" x{int(row['quant'])}" if pd.notna(row['quant']) and row['quant'] > 1 else ""
                 line = (
                     f"<span style='color:black'>{row['Client']}</span> — "
-                    f"{row['desc']}{quant_str}: "
+                    f"<span style='color:#077d02'>{row['desc']}{quant_str}</span>: "
                     f"<span style='color:blue'>{row['total']:,.2f}</span>"
                 ).replace(",", " ")
                 st.markdown(
