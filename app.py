@@ -236,7 +236,7 @@ client_controls(df_hora, df_orders)
 sheets_icon = "https://www.gstatic.com/images/branding/product/1x/sheets_2020q4_48dp.png"
 st.markdown(
     f"""<div class="bottom-bar">
-        <form action="" method="get" target="_parent" style="flex:1; margin:0;">
+        <form action="" method="get" target="_self" style="flex:1; margin:0;">
             <input type="hidden" name="refresh" value="1">
             <button type="submit" style="
                 width:100%; display:inline-flex; align-items:center; justify-content:center;
