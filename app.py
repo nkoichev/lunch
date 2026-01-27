@@ -236,13 +236,16 @@ client_controls(df_hora, df_orders)
 sheets_icon = "https://www.gstatic.com/images/branding/product/1x/sheets_2020q4_48dp.png"
 st.markdown(
     f"""<div class="bottom-bar">
-        <button onclick="window.parent.location.search='?refresh=1'" style="
-            flex:1; display:inline-flex; align-items:center; justify-content:center;
-            padding:0.75rem 1rem; border:1px solid #ccc; border-radius:0.5rem;
-            color:inherit; font-size:1.1rem; cursor:pointer;
-            background:white; font-family:inherit;">
-            🔄 Обнови
-        </button>
+        <form action="" method="get" target="_parent" style="flex:1; margin:0;">
+            <input type="hidden" name="refresh" value="1">
+            <button type="submit" style="
+                width:100%; display:inline-flex; align-items:center; justify-content:center;
+                padding:0.75rem 1rem; border:1px solid #ccc; border-radius:0.5rem;
+                color:inherit; font-size:1.1rem; cursor:pointer;
+                background:white; font-family:inherit;">
+                🔄 Обнови
+            </button>
+        </form>
         <a href="{file_url}" target="_blank" style="
             flex:1; display:inline-flex; align-items:center; justify-content:center; gap:0.4em;
             padding:0.75rem 1rem; border:1px solid #ccc; border-radius:0.5rem;
