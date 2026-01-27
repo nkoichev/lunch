@@ -128,7 +128,8 @@ df_hora, df_mandji, df_orders = load_google_sheets_data()
 
 
 # --- Lottie Animation ---
-with open("KjTHbioe5L.json", "r", errors='ignore') as f:
+_DIR = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(_DIR, "KjTHbioe5L.json"), "r", errors='ignore') as f:
     data_lottie = json.load(f)
 
 with st.container(horizontal=True, horizontal_alignment="center"):

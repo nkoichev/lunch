@@ -1,0 +1,6 @@
+secrets.toml
+.streamlit/secrets.toml
+mobile-app/
+__pycache__/
+*.md
+.git/
