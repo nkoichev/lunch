@@ -279,3 +279,7 @@ if st.query_params.get("refresh"):
     st.query_params.clear()
     st.cache_data.clear()
     st.rerun()
+    
+st.write("")
+st.write("")
+st.write("")
