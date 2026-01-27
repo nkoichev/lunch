@@ -234,9 +234,19 @@ client_controls(df_hora, df_orders)
 column1, column2 = st.columns([1,1])
 with column1:
 
-    button_update = st.button('🔄 Обнови данните')
+    button_update = st.button('🔄 Обнови')
     if button_update:
         st.cache_data.clear()
         st.rerun()
 with column2:
-    st.link_button('📂 Отвори файла', file_url)
+    sheets_icon = "https://www.gstatic.com/images/branding/product/1x/sheets_2020q4_48dp.png"
+    st.markdown(
+        f"""<a href="{file_url}" target="_blank" style="
+            display:inline-flex; align-items:center; gap:0.4em;
+            padding:0.5rem 1rem; border:1px solid #ccc; border-radius:0.5rem;
+            text-decoration:none; color:inherit; font-size:1rem;
+            background:white;">
+            <img src="{sheets_icon}" width="20" height="20"> Отвори файла
+        </a>""",
+        unsafe_allow_html=True,
+    )
