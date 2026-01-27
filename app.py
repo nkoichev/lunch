@@ -190,21 +190,17 @@ def client_controls(df_hora, df_orders):
             st.write(f'**{client_str}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
 
             df_client_sorted = df_client.sort_values(by='Client', ascending=True)
-            styled_df = df_client_sorted.style.format(thousands=" ", precision=2)
-            st.dataframe(
-                styled_df,
-                use_container_width=True,
-                hide_index=True,
-                column_config={
-                    "Client": st.column_config.TextColumn("Клиент", width="small"),
-                    "restorant": st.column_config.TextColumn("Рест.", width="small"),
-                    "desc": st.column_config.TextColumn("Описание", width="medium"),
-                    "price": st.column_config.NumberColumn("Цена", width="small", format="%.2f"),
-                    "disc_price": st.column_config.NumberColumn("Отст.", width="small", format="%.2f"),
-                    "quant": st.column_config.NumberColumn("Бр.", width="small"),
-                    "total": st.column_config.NumberColumn("Общо", width="small", format="%.2f"),
-                },
-            )
+            for _, row in df_client_sorted.iterrows():
+                quant_str = f" x{int(row['quant'])}" if pd.notna(row['quant']) and row['quant'] > 1 else ""
+                line = (
+                    f"<span style='color:black'>{row['Client']}</span> — "
+                    f"{row['desc']}{quant_str}: "
+                    f"<span style='color:blue'>{row['total']:,.2f}</span>"
+                ).replace(",", " ")
+                st.markdown(
+                    f"<p style='font-size:clamp(0.95rem, 3.5vw, 1.2rem); margin:0.2em 0;'>{line}</p>",
+                    unsafe_allow_html=True,
+                )
 
         st.write("---")
         st.write(f'Последна промяна: :red[**{formatted_time}**] /      [{text}]({file_url})')
