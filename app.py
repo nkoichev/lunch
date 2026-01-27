@@ -198,7 +198,7 @@ def client_controls(df_hora, df_orders):
                     f"<span style='color:blue'>{row['total']:,.2f}</span>"
                 ).replace(",", " ")
                 st.markdown(
-                    f"<p style='font-size:clamp(0.95rem, 3.5vw, 1.2rem); margin:0.2em 0;'>{line}</p>",
+                    f"<p style='font-size:clamp(1.4rem, 5vw, 2.5rem); margin:0.2em 0;'>{line}</p>",
                     unsafe_allow_html=True,
                 )
 
