@@ -233,11 +233,29 @@ def client_controls(df_hora, df_orders):
 
 client_controls(df_hora, df_orders)
 
-col1, col2 = st.columns(2)
-with col1:
-    if st.button("🔄 Обнови", use_container_width=True):
-        st.cache_data.clear()
-        st.rerun()
-with col2:
-    st.link_button("📄 Отвори файла", file_url, use_container_width=True)
+sheets_icon = "https://www.gstatic.com/images/branding/product/1x/sheets_2020q4_48dp.png"
+st.markdown(
+    f"""<div class="bottom-bar">
+        <a href="?refresh=1" style="
+            flex:1; display:inline-flex; align-items:center; justify-content:center;
+            padding:0.75rem 1rem; border:1px solid #ccc; border-radius:0.5rem;
+            text-decoration:none; color:inherit; font-size:1.1rem;
+            background:white;">
+            🔄 Обнови
+        </a>
+        <a href="{file_url}" target="_blank" style="
+            flex:1; display:inline-flex; align-items:center; justify-content:center; gap:0.4em;
+            padding:0.75rem 1rem; border:1px solid #ccc; border-radius:0.5rem;
+            text-decoration:none; color:inherit; font-size:1.1rem;
+            background:white;">
+            <img src="{sheets_icon}" width="20" height="20"> Отвори файла
+        </a>
+    </div>""",
+    unsafe_allow_html=True,
+)
+
+if st.query_params.get("refresh"):
+    st.query_params.clear()
+    st.cache_data.clear()
+    st.rerun()
     
