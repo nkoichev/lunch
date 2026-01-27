@@ -193,9 +193,7 @@ def client_controls(df_hora, df_orders):
                 s = s.replace("total", "Общо")
                 st.markdown(s, unsafe_allow_html=True)
         # else:
-            st.write('---') 
-            client_str = ', '.join(client) if isinstance(client, list) else str(client)
-            st.write(f'**{client_str}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
+            st.write('---')
 
             df_client_sorted = df_client.sort_values(by='Client', ascending=True)
             for _, row in df_client_sorted.iterrows():
@@ -209,6 +207,9 @@ def client_controls(df_hora, df_orders):
                     f"<p style='font-size:clamp(1.2rem, 5vw, 2.0rem); margin:0.2em 0;'>{line}</p>",
                     unsafe_allow_html=True,
                 )
+
+            client_str = ', '.join(client) if isinstance(client, list) else str(client)
+            st.write(f'**{client_str}**: :blue[**{format(round(suma, 2), ",.2f").replace(",0", "")}**] лева.')
 
         st.write("---")
         modified_line = (
