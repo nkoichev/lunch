@@ -236,7 +236,7 @@ client_controls(df_hora, df_orders)
 sheets_icon = "https://www.gstatic.com/images/branding/product/1x/sheets_2020q4_48dp.png"
 st.markdown(
     f"""<div class="bottom-bar">
-        <button onclick="window.location.search='?refresh=1'" style="
+        <button onclick="window.parent.location.search='?refresh=1'" style="
             flex:1; display:inline-flex; align-items:center; justify-content:center;
             padding:0.75rem 1rem; border:1px solid #ccc; border-radius:0.5rem;
             color:inherit; font-size:1.1rem; cursor:pointer;
