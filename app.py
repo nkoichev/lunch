@@ -74,34 +74,12 @@ st.markdown("""
                 margin: 0 auto;
             }
 
-            /* Extra bottom padding so content isn't hidden behind fixed bar */
-            .block-container {
-                padding-bottom: 5rem !important;
-            }
-
-            /* Fixed bottom button bar */
-            .bottom-bar {
-                position: fixed !important;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                z-index: 999;
-                background: white;
-                padding: 0.5rem 1rem;
-                box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
-                display: flex;
-                gap: 0.5rem;
-            }
         }
 
-        /* Equal size buttons */
-        .bottom-bar .stButton > button,
-        .bottom-bar .stLinkButton > a {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            font-size: 1.1rem;
-            text-align: center;
-            box-sizing: border-box;
+        /* Bottom button bar */
+        .bottom-bar {
+            display: flex;
+            gap: 0.5rem;
         }
     </style>
     """, unsafe_allow_html=True)
