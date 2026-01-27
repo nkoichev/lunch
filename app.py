@@ -43,8 +43,43 @@ credentials = service_account.Credentials.from_service_account_info(
 # --- Streamlit UI tweaks ---
 st.markdown("""
     <style>
+        /* Hide sidebar */
         section[data-testid="stSidebar"][aria-expanded="true"]{
             display: none;
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            /* Reduce main container padding */
+            .block-container {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+                padding-top: 1rem !important;
+            }
+
+            /* Smaller header */
+            .stMainBlockContainer {
+                max-width: 100% !important;
+            }
+
+            /* Make dataframes scroll horizontally */
+            .stDataFrame {
+                font-size: 0.8rem;
+            }
+
+            /* Larger touch target for buttons */
+            .stButton > button {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                font-size: 1.1rem;
+            }
+
+            /* Scale down Lottie animation on mobile */
+            iframe[title="streamlit_lottie.st_lottie"] {
+                max-width: 180px !important;
+                max-height: 180px !important;
+                margin: 0 auto;
+            }
         }
     </style>
     """, unsafe_allow_html=True)
@@ -146,7 +181,7 @@ def client_controls(df_hora, df_orders):
                     f"<span style='color:black'>{row['Client']}</span>: "
                     f"<span style='color:blue'>{row['total']:,.2f}</span>"
                 ).replace(",", " ")
-                s = f"<p style='font-size:40px;'>{formatted_total}</p>"
+                s = f"<p style='font-size:clamp(1.4rem, 5vw, 2.5rem);'>{formatted_total}</p>"
                 s = s.replace("total", "Общо")
                 st.markdown(s, unsafe_allow_html=True)
         # else:
@@ -156,7 +191,20 @@ def client_controls(df_hora, df_orders):
 
             df_client_sorted = df_client.sort_values(by='Client', ascending=True)
             styled_df = df_client_sorted.style.format(thousands=" ", precision=2)
-            st.dataframe(styled_df, use_container_width=True, hide_index=True)
+            st.dataframe(
+                styled_df,
+                use_container_width=True,
+                hide_index=True,
+                column_config={
+                    "Client": st.column_config.TextColumn("Клиент", width="small"),
+                    "restorant": st.column_config.TextColumn("Рест.", width="small"),
+                    "desc": st.column_config.TextColumn("Описание", width="medium"),
+                    "price": st.column_config.NumberColumn("Цена", width="small", format="%.2f"),
+                    "disc_price": st.column_config.NumberColumn("Отст.", width="small", format="%.2f"),
+                    "quant": st.column_config.NumberColumn("Бр.", width="small"),
+                    "total": st.column_config.NumberColumn("Общо", width="small", format="%.2f"),
+                },
+            )
 
         st.write("---")
         st.write(f'Последна промяна: :red[**{formatted_time}**] /      [{text}]({file_url})')
