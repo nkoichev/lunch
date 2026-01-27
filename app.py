@@ -223,7 +223,6 @@ def client_controls(df_hora, df_orders):
         st.write("---")
         modified_line = (
             f"Последна промяна: <span style='color:red'>{formatted_time}</span>"
-            f" / <a href='{file_url}' target='_blank'>{text}</a>"
         )
         st.markdown(
             f"<p style='font-size:clamp(1.2rem, 5vw, 2.0rem);'>{modified_line}</p>",
@@ -232,8 +231,12 @@ def client_controls(df_hora, df_orders):
 
 
 client_controls(df_hora, df_orders)
+column1, column2 = st.columns([1,1])
+with column1:
 
-button_update = st.button('🔄 Обнови данните')
-if button_update:
-    st.cache_data.clear()
-    st.rerun()
+    button_update = st.button('🔄 Обнови данните')
+    if button_update:
+        st.cache_data.clear()
+        st.rerun()
+with column2:
+    st.link_button('📂 Отвори файла', file_url)
