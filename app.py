@@ -67,19 +67,41 @@ st.markdown("""
                 font-size: 0.8rem;
             }
 
-            /* Larger touch target for buttons */
-            .stButton > button {
-                width: 100%;
-                padding: 0.75rem 1rem;
-                font-size: 1.1rem;
-            }
-
             /* Scale down Lottie animation on mobile */
             iframe[title="streamlit_lottie.st_lottie"] {
                 max-width: 180px !important;
                 max-height: 180px !important;
                 margin: 0 auto;
             }
+
+            /* Extra bottom padding so content isn't hidden behind fixed bar */
+            .block-container {
+                padding-bottom: 5rem !important;
+            }
+
+            /* Fixed bottom button bar */
+            .bottom-bar {
+                position: fixed !important;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 999;
+                background: white;
+                padding: 0.5rem 1rem;
+                box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+                display: flex;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Equal size buttons */
+        .bottom-bar .stButton > button,
+        .bottom-bar .stLinkButton > a {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1.1rem;
+            text-align: center;
+            box-sizing: border-box;
         }
     </style>
     """, unsafe_allow_html=True)
@@ -231,22 +253,29 @@ def client_controls(df_hora, df_orders):
 
 
 client_controls(df_hora, df_orders)
-column1, column2 = st.columns([1,1])
-with column1:
 
-    button_update = st.button('🔄 Обнови')
-    if button_update:
-        st.cache_data.clear()
-        st.rerun()
-with column2:
-    sheets_icon = "https://www.gstatic.com/images/branding/product/1x/sheets_2020q4_48dp.png"
-    st.markdown(
-        f"""<a href="{file_url}" target="_blank" style="
-            display:inline-flex; align-items:center; gap:0.4em;
-            padding:0.5rem 1rem; border:1px solid #ccc; border-radius:0.5rem;
-            text-decoration:none; color:inherit; font-size:1rem;
+sheets_icon = "https://www.gstatic.com/images/branding/product/1x/sheets_2020q4_48dp.png"
+st.markdown(
+    f"""<div class="bottom-bar">
+        <a href="?refresh=1" style="
+            flex:1; display:inline-flex; align-items:center; justify-content:center;
+            padding:0.75rem 1rem; border:1px solid #ccc; border-radius:0.5rem;
+            text-decoration:none; color:inherit; font-size:1.1rem;
+            background:white;">
+            🔄 Обнови
+        </a>
+        <a href="{file_url}" target="_blank" style="
+            flex:1; display:inline-flex; align-items:center; justify-content:center; gap:0.4em;
+            padding:0.75rem 1rem; border:1px solid #ccc; border-radius:0.5rem;
+            text-decoration:none; color:inherit; font-size:1.1rem;
             background:white;">
             <img src="{sheets_icon}" width="20" height="20"> Отвори файла
-        </a>""",
-        unsafe_allow_html=True,
-    )
+        </a>
+    </div>""",
+    unsafe_allow_html=True,
+)
+
+if st.query_params.get("refresh"):
+    st.query_params.clear()
+    st.cache_data.clear()
+    st.rerun()
