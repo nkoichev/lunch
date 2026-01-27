@@ -15,7 +15,7 @@ maxMessageSize = 5000
 
 [theme]
 base="light"
-#backgroundColor="#FDF7F2"  # Example Anthropic-like light background
+backgroundColor="#F0F0F0"
 #primaryColor="#027ed1"     # Example accent color
 #secondaryBackgroundColor="#FFFFFF"
 # textColor="#222222"
