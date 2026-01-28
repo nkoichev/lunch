@@ -71,15 +71,20 @@ app.get('/api/orders', async (req, res) => {
     // Parse orders
     const orders = rows
       .filter(row => row.length > 0 && row[0]) // Filter out empty rows
-      .map(row => ({
-        Client: row[0] || '',
-        restorant: row[1] || '',
-        desc: row[2] || '',
-        price: parseNumeric(row[3]),
-        disc_price: parseNumeric(row[4]),
-        quant: parseNumeric(row[5]),
-        total: parseNumeric(row[6])
-      }))
+      .map(row => {
+        const fullClient = row[0] || '';
+        const parts = fullClient.split(' | ');
+        return {
+          clientNum: parts[0] || '',
+          clientName: parts[1] || row[1] || '',
+          Client: fullClient,
+          desc: row[4] || '',
+          price: parseNumeric(row[5]),
+          disc_price: parseNumeric(row[6]),
+          quant: parseNumeric(row[7]),
+          total: parseNumeric(row[8])
+        };
+      })
       .filter(order => order.Client && order.Client !== 'total'); // Filter out total row
 
     // Calculate summary by client
@@ -107,7 +112,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Backend server running on port ${PORT}`);
   console.log(`API endpoints:`);
   console.log(`  - GET http://localhost:${PORT}/api/health`);

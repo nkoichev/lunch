@@ -7,7 +7,7 @@ import {
   RefreshControl,
   ActivityIndicator,
   TouchableOpacity,
-  SafeAreaView,
+  Platform,
   StatusBar,
   Alert
 } from 'react-native';
@@ -54,7 +54,7 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ExpoStatusBar style="light" />
       <StatusBar barStyle="light-content" backgroundColor="#0066cc" />
 
@@ -93,8 +93,7 @@ export default function App() {
 
           {/* Table Header */}
           <View style={styles.tableHeader}>
-            <Text style={[styles.tableHeaderText, styles.colClient]}>Клиент</Text>
-            <Text style={[styles.tableHeaderText, styles.colRestaurant]}>Ресторант</Text>
+            <Text style={[styles.tableHeaderText, styles.colName]}>Име</Text>
             <Text style={[styles.tableHeaderText, styles.colDesc]}>Описание</Text>
             <Text style={[styles.tableHeaderText, styles.colPrice]}>Цена</Text>
             <Text style={[styles.tableHeaderText, styles.colQuant]}>Бр.</Text>
@@ -110,8 +109,7 @@ export default function App() {
                 index % 2 === 0 ? styles.tableRowEven : styles.tableRowOdd
               ]}
             >
-              <Text style={[styles.tableCellText, styles.colClient]}>{order.Client}</Text>
-              <Text style={[styles.tableCellText, styles.colRestaurant]}>{order.restorant}</Text>
+              <Text style={[styles.tableCellText, styles.colName]}>{order.clientName}</Text>
               <Text style={[styles.tableCellText, styles.colDesc]}>{order.desc}</Text>
               <Text style={[styles.tableCellText, styles.colPrice]}>
                 {order.disc_price ? order.disc_price.toFixed(2) : order.price.toFixed(2)}
@@ -129,7 +127,7 @@ export default function App() {
           <Text style={styles.refreshButtonText}>🔄 Обнови данните</Text>
         </TouchableOpacity>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -152,7 +150,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#0066cc',
     padding: 20,
-    paddingTop: 10,
+    paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 0) + 15 : 15,
   },
   headerTitle: {
     fontSize: 24,
@@ -230,6 +228,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 12,
+    paddingRight: 8,
   },
   tableRow: {
     flexDirection: 'row',
@@ -246,11 +245,9 @@ const styles = StyleSheet.create({
   tableCellText: {
     fontSize: 12,
     color: '#333',
+    paddingRight: 8,
   },
-  colClient: {
-    flex: 2,
-  },
-  colRestaurant: {
+  colName: {
     flex: 2,
   },
   colDesc: {
