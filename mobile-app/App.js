@@ -61,7 +61,7 @@ export default function App() {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#0066cc" />
+        <ActivityIndicator size="large" color="#1ABC9C" />
         <Text style={styles.loadingText}>Зареждане на поръчки...</Text>
       </View>
     );
@@ -70,7 +70,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <ExpoStatusBar style="light" />
-      <StatusBar barStyle="light-content" backgroundColor="#0066cc" />
+      <StatusBar barStyle="light-content" backgroundColor="#1ABC9C" />
 
       <View style={styles.header}>
         <Text style={styles.headerTitle}>🍽️ Обедни Поръчки</Text>
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   header: {
-    backgroundColor: '#0066cc',
+    backgroundColor: '#1ABC9C',
     padding: 20,
     paddingTop: Platform.OS === 'android' ? (StatusBar.currentHeight || 0) + 15 : 15,
   },
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
   summaryTotal: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#0066cc',
+    color: '#F9A825',
   },
   divider: {
     height: 1,
@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
   },
   tableHeader: {
     flexDirection: 'row',
-    backgroundColor: '#0066cc',
+    backgroundColor: '#1ABC9C',
     padding: 10,
     borderRadius: 4,
   },
@@ -281,10 +281,10 @@ const styles = StyleSheet.create({
   },
   totalBold: {
     fontWeight: 'bold',
-    color: '#0066cc',
+    color: '#F9A825',
   },
   refreshButton: {
-    backgroundColor: '#0066cc',
+    backgroundColor: '#F9A825',
     margin: 15,
     padding: 15,
     borderRadius: 8,
