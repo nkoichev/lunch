@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { fetchLunchOrders } from './services/googleSheets';
+import { registerForPushNotifications, sendTokenToServer } from './services/notifications';
+import * as Notifications from 'expo-notifications';
 
 export default function App() {
   const [orders, setOrders] = useState([]);
@@ -37,6 +39,18 @@ export default function App() {
 
   useEffect(() => {
     loadData();
+
+    // Register for push notifications
+    registerForPushNotifications().then(token => {
+      if (token) sendTokenToServer(token);
+    });
+
+    // Reload data when a notification is received
+    const sub = Notifications.addNotificationReceivedListener(() => {
+      loadData();
+    });
+
+    return () => sub.remove();
   }, []);
 
   const onRefresh = () => {
@@ -78,7 +92,7 @@ export default function App() {
             {summary.map((item, index) => (
               <View key={index} style={styles.summaryRow}>
                 <Text style={styles.summaryName}>{item.Client}</Text>
-                <Text style={styles.summaryTotal}>{item.total.toFixed(2)} лв</Text>
+                <Text style={styles.summaryTotal}>{item.total.toFixed(2)} €</Text>
               </View>
             ))}
           </View>

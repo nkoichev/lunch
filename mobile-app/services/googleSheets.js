@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJKKe23cys8FM4vEQkmNejhCzm4ig6uXRqN6FYU3ex71YBumprsLZdFypZVHVn6t6Psg/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxu6zKzw8paF0WwzClSjHbtsHlz5msaTNlubPHfFuI70lm6tErZa9KEZnSG1Kpdphl_Jg/exec';
 
 /**
  * Fetch lunch orders from Google Sheets via Apps Script
