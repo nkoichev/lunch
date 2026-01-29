@@ -16,7 +16,8 @@
     },
     "android": {
       "package": "com.lunchorders.app",
-      "versionCode": 2,
+      "versionCode": 3,
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#2EC4B6"

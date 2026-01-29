@@ -56,7 +56,7 @@ export async function registerForPushNotifications() {
  * Send push token to Apps Script for storage
  */
 export async function sendTokenToServer(token) {
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxu6zKzw8paF0WwzClSjHbtsHlz5msaTNlubPHfFuI70lm6tErZa9KEZnSG1Kpdphl_Jg/exec';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzMemAOfK39uZKbRMWpCoJfSTGPtGM6Wup4VGXdqjzwmLb1Qy7eJEH2N4ro8jPFyVOekw/exec';
 
   try {
     await fetch(APPS_SCRIPT_URL, {

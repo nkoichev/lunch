@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxu6zKzw8paF0WwzClSjHbtsHlz5msaTNlubPHfFuI70lm6tErZa9KEZnSG1Kpdphl_Jg/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzMemAOfK39uZKbRMWpCoJfSTGPtGM6Wup4VGXdqjzwmLb1Qy7eJEH2N4ro8jPFyVOekw/exec';
 
 /**
  * Fetch lunch orders from Google Sheets via Apps Script
@@ -16,7 +16,8 @@ export async function fetchLunchOrders() {
 
     return {
       orders: data.orders || [],
-      summary: data.summary || []
+      summary: data.summary || [],
+      lastModified: data.lastModified || null
     };
   } catch (error) {
     console.error('Error fetching lunch orders:', error);

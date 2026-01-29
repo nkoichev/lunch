@@ -28,7 +28,9 @@ export default function App() {
       const data = await fetchLunchOrders();
       setOrders(data.orders);
       setSummary(data.summary);
-      setLastUpdate(new Date().toLocaleString('bg-BG'));
+      if (data.lastModified) {
+        setLastUpdate(data.lastModified);
+      }
     } catch (error) {
       Alert.alert('Грешка', 'Неуспешно зареждане на данните: ' + error.message);
     } finally {
@@ -284,7 +286,7 @@ const styles = StyleSheet.create({
     color: '#F9A825',
   },
   refreshButton: {
-    backgroundColor: '#F9A825',
+    backgroundColor: '#1ABC9C',
     margin: 15,
     padding: 15,
     borderRadius: 8,
