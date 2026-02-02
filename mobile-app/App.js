@@ -39,6 +39,19 @@ export default function App() {
     }
   };
 
+  // Get refresh interval based on Sofia time (30s during 9-13, 5min otherwise)
+  const getRefreshInterval = () => {
+    const now = new Date();
+    // Convert to Sofia time (UTC+2 or UTC+3 during DST)
+    const sofiaTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Sofia' }));
+    const hour = sofiaTime.getHours();
+    // Active hours: 9:00 - 13:00 -> 30 seconds, otherwise 5 minutes
+    if (hour >= 9 && hour < 13) {
+      return 30 * 1000; // 30 seconds
+    }
+    return 5 * 60 * 1000; // 5 minutes
+  };
+
   useEffect(() => {
     loadData();
 
@@ -48,11 +61,25 @@ export default function App() {
     });
 
     // Reload data when a notification is received
-    const sub = Notifications.addNotificationReceivedListener(() => {
+    const notificationSub = Notifications.addNotificationReceivedListener(() => {
       loadData();
     });
 
-    return () => sub.remove();
+    // Auto-refresh with dynamic interval
+    let refreshTimer;
+    const scheduleRefresh = () => {
+      const interval = getRefreshInterval();
+      refreshTimer = setTimeout(() => {
+        loadData();
+        scheduleRefresh(); // Schedule next refresh with potentially new interval
+      }, interval);
+    };
+    scheduleRefresh();
+
+    return () => {
+      notificationSub.remove();
+      if (refreshTimer) clearTimeout(refreshTimer);
+    };
   }, []);
 
   const onRefresh = () => {

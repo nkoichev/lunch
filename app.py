@@ -84,8 +84,18 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
+# --- Dynamic TTL based on time of day (Sofia timezone) ---
+def get_dynamic_ttl():
+    sofia = pytz.timezone('Europe/Sofia')
+    now = datetime.now(sofia)
+    hour = now.hour
+    # Active hours: 9:00 - 13:00 -> 30 seconds, otherwise 5 minutes
+    if 9 <= hour < 13:
+        return 30
+    return 300
+
 # --- Get spreadsheet last modified time (using Drive API, fast) ---
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=get_dynamic_ttl())
 def get_spreadsheet_modified_time():
     drive_service = build('drive', 'v3', credentials=credentials)
     meta = drive_service.files().get(fileId=SPREADSHEET_ID, fields='modifiedTime').execute()
@@ -99,7 +109,7 @@ file_url = SPREADSHEET_URL
 text = 'Open file'
 
 # --- Load Google Sheets Data (use gspread with cache) ---
-@st.cache_data(show_spinner=True, ttl=120)
+@st.cache_data(show_spinner=True, ttl=get_dynamic_ttl())
 def load_google_sheets_data():
     gc = gspread.authorize(credentials)
     sh = gc.open_by_key(SPREADSHEET_ID)
