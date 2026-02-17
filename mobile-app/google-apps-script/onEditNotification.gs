@@ -1,5 +1,9 @@
 /**
- * Google Apps Script - onEdit trigger for column K notifications
+ * Google Apps Script - onEdit trigger reads column K for notifications
+ *
+ * When a user manually edits any cell in the "Orders" sheet,
+ * this trigger reads column K of the edited row (which contains
+ * a formula producing "name|order") and sends a push notification.
  *
  * SETUP INSTRUCTIONS:
  * 1. Open your Google Sheet
@@ -7,9 +11,6 @@
  * 3. Replace the existing code with this script
  * 4. Save and run setupTrigger() once to create the installable trigger
  * 5. Authorize the script when prompted
- *
- * NOTE: Simple onEdit triggers cannot make external HTTP calls,
- * so we use an installable trigger via setupTrigger().
  */
 
 /**
@@ -17,15 +18,16 @@
  * Go to Run > setupTrigger in the Apps Script editor.
  */
 function setupTrigger() {
-  // Remove any existing onEdit triggers to avoid duplicates
+  // Remove any existing triggers to avoid duplicates
   var triggers = ScriptApp.getProjectTriggers();
   for (var i = 0; i < triggers.length; i++) {
-    if (triggers[i].getHandlerFunction() === 'onSheetEdit') {
+    var funcName = triggers[i].getHandlerFunction();
+    if (funcName === 'onSheetEdit' || funcName === 'checkColumnK') {
       ScriptApp.deleteTrigger(triggers[i]);
     }
   }
 
-  // Create new installable trigger
+  // Create installable onEdit trigger
   ScriptApp.newTrigger('onSheetEdit')
     .forSpreadsheet(SpreadsheetApp.getActive())
     .onEdit()
@@ -35,19 +37,31 @@ function setupTrigger() {
 }
 
 /**
- * Installable onEdit trigger - fires when any cell is edited.
- * Checks if the edit is in column K of the "Orders" sheet,
- * reads the "name|order" value, and sends a push notification.
+ * Installable onEdit trigger - fires on any manual edit.
+ * When column H (column 8) in the "Orders" sheet is edited (row 4+),
+ * reads column K of that row and sends a push notification
+ * with the "name|order" value.
  */
 function onSheetEdit(e) {
   var sheet = e.source.getActiveSheet();
-  var range = e.range;
 
-  // Only react to edits in the "Orders" sheet, column K (column 11)
+  // Only react to edits in the "Orders" sheet
   if (sheet.getName() !== 'Orders') return;
-  if (range.getColumn() !== 11) return;
 
-  var value = range.getValue();
+  var row = e.range.getRow();
+  var col = e.range.getColumn();
+
+  // Skip header rows (data starts at row 4)
+  if (row < 4) return;
+
+  // Only react to edits in column H (column 8)
+  if (col !== 8) return;
+
+  // Read column K (column 11) of the edited row
+  // Small delay to let the formula recalculate
+  SpreadsheetApp.flush();
+  var value = sheet.getRange(row, 11).getDisplayValue();
+
   if (!value || value.toString().trim() === '') return;
 
   // Value format is "name|order"
@@ -93,7 +107,7 @@ function sendPushNotification(title, body) {
 
   try {
     var response = UrlFetchApp.fetch('https://exp.host/--/api/v2/push/send', options);
-    Logger.log('Push notification sent: ' + response.getContentText());
+    Logger.log('Push notification sent: ' + body + ' | Response: ' + response.getContentText());
   } catch (error) {
     Logger.log('Error sending push notification: ' + error);
   }
