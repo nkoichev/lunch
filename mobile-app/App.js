@@ -22,6 +22,7 @@ export default function App() {
   const [refreshing, setRefreshing] = useState(false);
   const [lastUpdate, setLastUpdate] = useState(null);
   const [summary, setSummary] = useState([]);
+  const [lastNotification, setLastNotification] = useState(null);
 
   const loadData = async () => {
     try {
@@ -60,8 +61,10 @@ export default function App() {
       if (token) sendTokenToServer(token);
     });
 
-    // Reload data when a notification is received
-    const notificationSub = Notifications.addNotificationReceivedListener(() => {
+    // Reload data and show order info when a notification is received
+    const notificationSub = Notifications.addNotificationReceivedListener((notification) => {
+      const body = notification.request.content.body || '';
+      setLastNotification(body);
       loadData();
     });
 
@@ -114,6 +117,16 @@ export default function App() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
+        {/* Last Notification Banner */}
+        {lastNotification && (
+          <View style={styles.notificationBanner}>
+            <Text style={styles.notificationText}>🔔 {lastNotification}</Text>
+            <TouchableOpacity onPress={() => setLastNotification(null)}>
+              <Text style={styles.notificationDismiss}>✕</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
         {/* Summary Section */}
         {summary.length > 0 && (
           <View style={styles.summaryContainer}>
@@ -323,5 +336,27 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  notificationBanner: {
+    backgroundColor: '#FFF3E0',
+    margin: 15,
+    marginBottom: 0,
+    padding: 12,
+    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderLeftWidth: 4,
+    borderLeftColor: '#F9A825',
+  },
+  notificationText: {
+    fontSize: 14,
+    color: '#333',
+    flex: 1,
+  },
+  notificationDismiss: {
+    fontSize: 18,
+    color: '#999',
+    paddingLeft: 10,
   },
 });
