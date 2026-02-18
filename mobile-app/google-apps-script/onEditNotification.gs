@@ -22,7 +22,7 @@ function setupTrigger() {
   var triggers = ScriptApp.getProjectTriggers();
   for (var i = 0; i < triggers.length; i++) {
     var funcName = triggers[i].getHandlerFunction();
-    if (funcName === 'onSheetEdit' || funcName === 'checkColumnK') {
+    if (funcName === 'onSheetEdit' || funcName === 'checkColumnK' || funcName === 'checkNewOrders') {
       ScriptApp.deleteTrigger(triggers[i]);
     }
   }
